@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImageService } from './image.service';
 
 import { NgxGalleryOptions } from '@kolkov/ngx-gallery';
