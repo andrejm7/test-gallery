@@ -13,6 +13,7 @@ import { NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 export class AppComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  newGalleryImages: NgxGalleryImage[];
 
   base64data: string;
   imageUrl;
@@ -46,8 +47,7 @@ export class AppComponent implements OnInit {
       }
     ];
 
-    this.test();
-
+    this.newGalleryImages = [];
     this.galleryImages = [
       {
         small: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
@@ -64,22 +64,26 @@ export class AppComponent implements OnInit {
         big: 'https://preview.ibb.co/kZGsLm/img8.jpg'
       },
     ];
+
+    this.test();
   }
 
   test() {
     this.imageService.downloadPDF()
       .subscribe((blob) => {
-        let base64data;
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        // tslint:disable-next-line:only-arrow-functions
-        reader.onloadend = function() {
-          base64data = reader.result;
-          console.log(base64data);
-        }
-        // let imageUrl = source;
+        // let base64data;
+        // const reader = new FileReader();
+        // reader.readAsDataURL(blob);
+        // // tslint:disable-next-line:only-arrow-functions
+        // reader.onload = function() {
+        //   base64data = reader.result;
+        //   console.log(base64data);
+        // };
+        // // let imageUrl = source;
 
-        this.galleryImages.push({ medium: base64data, small: base64data });
+        // this.galleryImages.push({ medium: base64data, small: base64data });
+        const imageUrl = URL.createObjectURL(blob);
+        this.galleryImages.push({ medium: imageUrl, small: imageUrl });
       });
   }
 
